@@ -21,7 +21,7 @@ public class ImageScroll extends JFrame {
 	ImageIcon imgIcon;
 
 	public ImageScroll() {
-		// TODO Auto-generated constructor stub
+
 		setSize(400, 300);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
