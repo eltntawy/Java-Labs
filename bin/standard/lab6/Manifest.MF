@@ -1,3 +1,0 @@
-Main-Class: TextEditor
-SplashScreen-Image: SplashScreen.png
-Icon: Info.png
