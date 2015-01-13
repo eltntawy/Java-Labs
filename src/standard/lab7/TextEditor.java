@@ -435,8 +435,7 @@ public class TextEditor extends JFrame implements ActionListener, KeyListener {
 					UIManager.setLookAndFeel(item.getToolTipText());
 					SwingUtilities.updateComponentTreeUI(this);
 				}
-			} catch (ClassNotFoundException | InstantiationException
-					| IllegalAccessException | UnsupportedLookAndFeelException e1) {
+			} catch (Exception e1) {
 
 				e1.printStackTrace();
 			}
