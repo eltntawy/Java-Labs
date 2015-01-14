@@ -422,8 +422,7 @@ public class TextEditor extends JFrame implements ActionListener, KeyListener {
 			System.out.println(index + " - " + historyVector.get(index));
 		} else if (e.getSource() == menuItemFormat) {
 
-			FontDialog fontDialog = new FontDialog(this, txtArea.getFont(),
-					txtArea.getForeground());
+			FontDialog fontDialog = new FontDialog(this, txtArea.getFont(),txtArea.getForeground());
 			fontDialog.setVisible(true);
 
 		} else if (e.getSource() instanceof JMenuItem) {
@@ -492,13 +491,15 @@ public class TextEditor extends JFrame implements ActionListener, KeyListener {
 			setTitle("Font Chooser");
 			setSize(500, 300);
 			setLayout(new BorderLayout());
-
+			
 			this.font = font;
 			this.color = color;
 
 			init();
 			dynInit();
 
+			fontJlist.setAutoscrolls(true);
+			
 			sampleLabel.setForeground(color);
 			sampleLabel.setFont(font);
 		}
@@ -534,7 +535,10 @@ public class TextEditor extends JFrame implements ActionListener, KeyListener {
 			fontJlist.setModel(fontListModel);
 			fontJlist.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 			fontJlist.addListSelectionListener(this);
-
+			
+			fontJlist.ensureIndexIsVisible(fontListModel.indexOf(font.getName()));
+			fontJlist.setSelectedIndex(fontListModel.indexOf(font.getName()));
+			
 			// color
 			DefaultComboBoxModel<String> colorListModel = new DefaultComboBoxModel<String>();
 			colorListModel.addElement("BLACK");
