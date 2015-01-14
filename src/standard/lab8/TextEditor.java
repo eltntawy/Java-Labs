@@ -49,6 +49,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JColorChooser;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
@@ -83,7 +84,7 @@ import java.awt.Cursor;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-public class TextEditor extends JFrame implements ActionListener, KeyListener,PropertyChangeListener,ChangeListener {
+public class TextEditor extends JFrame implements ActionListener, KeyListener,ChangeListener {
 
     private JTextArea txtArea;
     private JScrollPane mainPanel;
@@ -149,6 +150,9 @@ public class TextEditor extends JFrame implements ActionListener, KeyListener,Pr
     private Font oldFont ;
     private Font newFont;
     
+    private Color oldColor= Color.black ;
+    private Color newColor= Color.black ;
+    
     private JSlider sizeJSlider;
 
     public TextEditor() {
@@ -205,6 +209,7 @@ public class TextEditor extends JFrame implements ActionListener, KeyListener,Pr
 	newFont = txtArea.getFont();
 	
 	popupMenu = new JPopupMenu();
+	popupMenu.setPreferredSize(new Dimension(100,100));
 	addPopup(txtArea, popupMenu);
 	mainPanel = new JScrollPane();
 	menuBar = new JMenuBar();
@@ -474,7 +479,7 @@ public class TextEditor extends JFrame implements ActionListener, KeyListener,Pr
 		fontListModel.addElement(fontName);
 	    }
 	    comboBoxFont.setModel(fontListModel);
-	    comboBoxFont.addPropertyChangeListener(this);
+	    comboBoxFont.addActionListener(this);
 
 
 	    // color
@@ -483,6 +488,7 @@ public class TextEditor extends JFrame implements ActionListener, KeyListener,Pr
 	    colorListModel.addElement("RED");
 	    colorListModel.addElement("GREEN");
 	    colorListModel.addElement("BLUE");
+	    colorListModel.addElement("Color Picker");
 	    comboBoxColor.setModel(colorListModel);
 	    comboBoxColor.addActionListener(this);
 	    comboBoxColor.setRenderer(new ListCellRenderer<String>() {
@@ -547,7 +553,31 @@ public class TextEditor extends JFrame implements ActionListener, KeyListener,Pr
     public void actionPerformed(ActionEvent e) {
 	// TODO Auto-generated method stub
 
-	
+	if(e.getSource() == comboBoxColor ) {
+	    String color = comboBoxColor.getSelectedItem().toString();
+	    Color selectedColor = Color.black;
+	    if ("RED" == color) {
+		    selectedColor = Color.RED;
+		} else if ("GREEN" == color) {
+		    selectedColor = Color.GREEN;
+		} else if ("BLUE" == color) {
+		    selectedColor = Color.BLUE;
+		} else if ("BLACK" == color) {
+		    selectedColor = Color.BLACK;
+		} else if ("Color Picker".equals(color)) {
+		    
+		    selectedColor = JColorChooser.showDialog(TextEditor.this, "Choose your Color", oldColor);
+		}
+		txtArea.setForeground(selectedColor);
+		
+		oldColor = selectedColor;
+	    
+	} else if (e.getSource() == comboBoxFont) {
+	    
+	    oldFont = new Font(comboBoxFont.getSelectedItem().toString(),oldFont.getStyle(),sizeJSlider.getValue());
+	    
+	    txtArea.setFont(oldFont);
+	}
 	
 	
 	if (e.getSource() == menuItemNew || e.getSource() == popupMenuItemNew || e.getSource() == btnNew) {
@@ -890,7 +920,7 @@ public class TextEditor extends JFrame implements ActionListener, KeyListener,Pr
 
     class FontDialog extends JDialog implements ActionListener, ChangeListener, ListSelectionListener {
 
-	private JList<String> comboBoxFont;
+	private JList<String> jlistFont;
 	private JComboBox<String> comboBoxColor;
 	private JSlider sizeJSlider;
 	private JPanel toolPanel;
@@ -923,7 +953,7 @@ public class TextEditor extends JFrame implements ActionListener, KeyListener,Pr
 	}
 
 	public void init() {
-	    comboBoxFont = new JList<String>();
+	    jlistFont = new JList<String>();
 	    comboBoxColor = new JComboBox<String>();
 	    sizeJSlider = new JSlider(JSlider.VERTICAL);
 	    toolPanel = new JPanel();
@@ -949,12 +979,12 @@ public class TextEditor extends JFrame implements ActionListener, KeyListener,Pr
 	    for (String fontName : genv.getAvailableFontFamilyNames()) {
 		fontListModel.addElement(fontName);
 	    }
-	    comboBoxFont.setModel(fontListModel);
-	    comboBoxFont.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-	    comboBoxFont.addListSelectionListener(this);
+	    jlistFont.setModel(fontListModel);
+	    jlistFont.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+	    jlistFont.addListSelectionListener(this);
 
-	    comboBoxFont.ensureIndexIsVisible(fontListModel.indexOf(font.getName()));
-	    comboBoxFont.setSelectedIndex(fontListModel.indexOf(font.getName()));
+	    jlistFont.ensureIndexIsVisible(fontListModel.indexOf(font.getName()));
+	    jlistFont.setSelectedIndex(fontListModel.indexOf(font.getName()));
 
 	    // color
 	    DefaultComboBoxModel<String> colorListModel = new DefaultComboBoxModel<String>();
@@ -1185,11 +1215,6 @@ public class TextEditor extends JFrame implements ActionListener, KeyListener,Pr
 
     }
 
-    @Override
-    public void propertyChange(PropertyChangeEvent evt) {
-	// TODO Auto-generated method stub
-	
-    }
 
     @Override
     public void stateChanged(ChangeEvent e) {
