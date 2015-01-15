@@ -69,7 +69,14 @@ class ChatHandlerThread extends Thread {
 		try {
 		    
 		    String s = dis.readUTF();
-		    brodcastMessage(s);
+		    if("EOF".equals(s)) {
+			clientVector.remove(this);
+			break;
+		    } else {
+			brodcastMessage(s);
+		    }
+		    
+		    
 		} catch (IOException e) {
 		    e.printStackTrace();
 		    clientVector.remove(this);
@@ -80,10 +87,21 @@ class ChatHandlerThread extends Thread {
 	
 	void brodcastMessage(String s) throws IOException {
 	    
-	    System.out.println(new Date() + " : "+clientSocket.getInetAddress().getAddress()+" - "+s);
+	    System.out.print(new Date() + " : "+clientSocket.getInetAddress().getHostAddress()+" - "+s+"\n");
 	    for(ChatHandlerThread chat : clientVector) {
-		chat.dos.writeUTF(clientSocket.getInetAddress().getHostAddress() + " : "+s);
+		chat.dos.writeUTF(clientSocket.getInetAddress().getHostAddress() + " : "+s+"\n");
+		chat.dos.writeUTF(getClientsAsString());
+		
+		
 	    }
+	}
+	
+	String getClientsAsString() {
+	    String ret = "";
+	    for(ChatHandlerThread client : clientVector) {
+		ret+=client.clientSocket.getInetAddress().getHostAddress()+"#";
+	    }
+	    return ret;
 	}
 }
 

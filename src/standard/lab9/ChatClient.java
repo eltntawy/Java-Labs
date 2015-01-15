@@ -1,33 +1,32 @@
 package standard.lab9;
 
-import javax.swing.JFrame;
-import javax.swing.JScrollPane;
-
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.Rectangle;
-
-import javax.swing.JDialog;
-import javax.swing.JOptionPane;
-import javax.swing.JTextArea;
-import javax.swing.JPanel;
-import javax.swing.JButton;
-import javax.swing.SwingUtilities;
-import javax.swing.text.DefaultCaret;
-
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.StringTokenizer;
 
-public class ChatClient extends JDialog implements ActionListener {
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.text.DefaultCaret;
+
+public class ChatClient extends JFrame implements ActionListener {
     private JButton btnSend;
     private JScrollPane scrollPane;
     private JTextArea txtChatHistory;
@@ -39,6 +38,8 @@ public class ChatClient extends JDialog implements ActionListener {
 
     private DataInputStream dis;
     private DataOutputStream dos;
+    private JScrollPane onlineClientsPanel;
+    private final JList onlineList = new JList();
 
     public ChatClient(String address, int port) {
 
@@ -51,6 +52,54 @@ public class ChatClient extends JDialog implements ActionListener {
 	setTitle("Client Chat Application");
 	init();
 	dynInit();
+	addWindowListener(new WindowListener() {
+
+	    @Override
+	    public void windowOpened(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	    }
+
+	    @Override
+	    public void windowClosing(WindowEvent e) {
+		// TODO Auto-generated method stub
+		sendMessage("EOF");
+	    }
+
+	   
+
+	    @Override
+	    public void windowClosed(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	    }
+
+	    @Override
+	    public void windowIconified(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	    }
+
+	    @Override
+	    public void windowDeiconified(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	    }
+
+	    @Override
+	    public void windowActivated(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	    }
+
+	    @Override
+	    public void windowDeactivated(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	    }
+	    
+	});
+	
 	try {
 	    initSocketConnection();
 	} catch (UnknownHostException e) {
@@ -86,6 +135,7 @@ public class ChatClient extends JDialog implements ActionListener {
 	txtChatHistory.setEditable(false);
 	DefaultCaret caret = (DefaultCaret)txtChatHistory.getCaret();
 	caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
+	btnSend.setEnabled(false);
     }
 
     public void dynInit() {
@@ -96,9 +146,7 @@ public class ChatClient extends JDialog implements ActionListener {
 	    @Override
 	    public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
-		if (e.getKeyChar() == KeyEvent.VK_ENTER) {
-		    sendMessage();
-		}
+		
 	    }
 
 	    @Override
@@ -110,7 +158,16 @@ public class ChatClient extends JDialog implements ActionListener {
 	    @Override
 	    public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
-
+		e.consume();
+		if(e.getKeyCode() == KeyEvent.VK_ENTER && !txtChat.getText().equals("")) {
+		    sendMessage();
+		    txtChat.setText("");
+		}
+		
+		if(txtChat.getText().equals("") )
+		    btnSend.setEnabled(false);
+		else 
+		    btnSend.setEnabled(true);
 	    }
 	});
 	scrollPane.setViewportView(txtChatHistory);
@@ -118,6 +175,12 @@ public class ChatClient extends JDialog implements ActionListener {
 	panel.add(txtChat, BorderLayout.WEST);
 	panel.add(btnSend, BorderLayout.EAST);
 	getContentPane().add(scrollPane, BorderLayout.CENTER);
+	
+	onlineClientsPanel = new JScrollPane();
+	onlineClientsPanel.setPreferredSize(new Dimension(150,400));
+	onlineClientsPanel.setViewportView(onlineList);
+	getContentPane().add(onlineClientsPanel,BorderLayout.EAST);
+	
     }
 
     public void initSocketConnection() throws IOException {
@@ -127,7 +190,7 @@ public class ChatClient extends JDialog implements ActionListener {
 	    dis = new DataInputStream(s.getInputStream());
 	    dos = new DataOutputStream(s.getOutputStream());
 
-	    new ChatHandlerClientReadThread(dis, txtChatHistory).start();
+	    new ChatHandlerClientReadThread(dis, txtChatHistory,onlineList).start();
 
 	
 
@@ -137,7 +200,7 @@ public class ChatClient extends JDialog implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 	// TODO Auto-generated method stub
 
-	if (e.getSource() == btnSend) {
+	if (e.getSource() == btnSend && !txtChat.getText().equals("")) {
 	    sendMessage();
 	}
     }
@@ -145,6 +208,13 @@ public class ChatClient extends JDialog implements ActionListener {
     void sendMessage() {
 	new ChatHandlerClientWriteThread(dos, txtChat.getText()).start();
 	txtChat.setText("");
+	btnSend.setEnabled(false);
+    }
+    void sendMessage(String string) {
+	// TODO Auto-generated method stub
+	new ChatHandlerClientWriteThread(dos, string).start();
+	txtChat.setText("");
+	btnSend.setEnabled(false);
     }
 
     public static void main(String[] args) {
@@ -206,11 +276,12 @@ class ChatHandlerClientReadThread extends Thread {
     DataInputStream dis;
 
     JTextArea txtAreaHistory;
+    JList<String> onlineList;
 
-    public ChatHandlerClientReadThread(DataInputStream dis, JTextArea txtAreaHistory) {
+    public ChatHandlerClientReadThread(DataInputStream dis, JTextArea txtAreaHistory,JList<String> onLineList) {
 
 	this.dis = dis;
-
+	this.onlineList = onLineList;
 	this.txtAreaHistory = txtAreaHistory;
 
     }
@@ -221,6 +292,15 @@ class ChatHandlerClientReadThread extends Thread {
 
 	    while (true) {
 		String s = dis.readUTF();
+		String online = dis.readUTF();
+		
+		DefaultListModel<String > model = new DefaultListModel<String>();
+		StringTokenizer strTkn = new StringTokenizer(online,"#");
+		while(strTkn.hasMoreElements()) {
+		    model.addElement(strTkn.nextToken());
+		}
+		onlineList.setModel(model);
+		onlineList.repaint();
 		txtAreaHistory.append(s + "");
 		
 	    }
