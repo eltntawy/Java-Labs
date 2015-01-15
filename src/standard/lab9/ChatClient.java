@@ -57,11 +57,15 @@ public class ChatClient extends JDialog implements ActionListener {
 	    // TODO Auto-generated catch block
 	    JOptionPane.showMessageDialog(null, e.getMessage());
 	    e.printStackTrace();
+	    dispose();
+	    System.exit(1);
 
 	} catch (IOException e) {
 	    // TODO Auto-generated catch block
 	    JOptionPane.showMessageDialog(null, e.getMessage());
 	    e.printStackTrace();
+	    dispose();
+	    System.exit(1);
 	}
 
     }
@@ -118,18 +122,14 @@ public class ChatClient extends JDialog implements ActionListener {
 
     public void initSocketConnection() throws IOException {
 
-	try {
+	
 	    Socket s = new Socket(address, port);
 	    dis = new DataInputStream(s.getInputStream());
 	    dos = new DataOutputStream(s.getOutputStream());
 
 	    new ChatHandlerClientReadThread(dis, txtChatHistory).start();
 
-	} catch (UnknownHostException e) {
-	    JOptionPane.showMessageDialog(null, e.getMessage());
-	    dispose();
-	    e.printStackTrace();
-	}
+	
 
     }
 
@@ -167,6 +167,7 @@ public class ChatClient extends JDialog implements ActionListener {
 
 	} catch (NumberFormatException e) {
 	    JOptionPane.showMessageDialog(null, "Please enter valid data");
+	    
 	    e.printStackTrace();
 	}
 
