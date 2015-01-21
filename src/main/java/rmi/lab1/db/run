@@ -1,0 +1,8 @@
+ javac -d . main/java/rmi/lab1/db/server/RMIServiceImpl.java main/java/rmi/lab1/db/server/Emp.java main/java/rmi/lab1/db/server/Address.java main/java/rmi/lab1/db/server/RMIServiceInterface.java main/java/rmi/lab1/db/server/RMIServer.java -cp "/home/eltntawy/.m2/repository/mysql/mysql-connector-java/5.1.6/mysql-connector-java-5.1.6.jar"
+
+
+javac -d . main/java/rmi/lab1/db/client/RMIClient.java 
+
+
+
+rmic -d . main.java.rmi.lab1.db.server.RMIServiceImpl

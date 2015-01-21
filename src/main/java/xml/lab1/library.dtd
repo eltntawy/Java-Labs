@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE librarys [ 
+		<!ELEMENT library (book*)>
+		<!ELEMENT book (parts*)+>
+		<!ELEMENT parts (part , chapter)+>
+		<!ELEMENT part (#PCDATA)+>
+		<!ELEMENT chapter (sections+)>
+		<!ELEMENT sections (paragraph+)>
+		<!ELEMENT paragraph (#PCDATA)*>
+]>
+
+
+<!ATTLIST library 
+		name CDATA ""
+		location CDATA ""
+		description CDATA "">
+		
+
+<!ATTLIST book 
+		ISBN  CDATA ""
+		title  CDATA ""
+		author  CDATA ""
+		preface  CDATA "">
+		
+<!ATTLIST parts >
+
+<!ATTLIST part 
+		title  CDATA "">
+
+<!ATTLIST chapter 
+		title  CDATA ""
+		summary  CDATA "">	
+
+<!ATTLIST sections 
+		title  CDATA ""
+		summary  CDATA "">
+		
+<!ATTLIST paragraph >
+	
+	
+	
+	
+	
+	
+	
+	
+	
