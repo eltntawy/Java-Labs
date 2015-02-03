@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<xs:schema version="1.0"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified">
+    
+<xs:element name="title" type="xs:string" />    
+<xs:element name="author" type="xs:string" />    
+<xs:element name="date" type="xs:string" />    
+<xs:element name="ISBN" type="xs:string" />    
+<xs:element name="publisher" type="xs:string" />    
+    
+<xs:element name="BookStor">
+
+    <xs:complexType >
+        <xs:sequence >
+            <xs:element ref = "title" ></xs:element>
+            <xs:element ref="author" ></xs:element>
+            <xs:element ref="date" ></xs:element>
+            <xs:element ref="ISBN" ></xs:element>
+            <xs:element  ref="publisher"></xs:element>
+        </xs:sequence>
+    </xs:complexType>
+</xs:element> 
+</xs:schema>

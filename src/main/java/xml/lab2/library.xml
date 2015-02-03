@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- <!DOCTYPE library SYSTEM "library.dtd"> -->
+<libraries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:noNamespaceSchemaLocation="library.xsd" >
+
+	<library name="" location="" description="">
+		<book ISBN="" title="" author="" preface="">
+			<parts>
+				<part title="">
+					<chapter title="" summary="">
+
+						<section title="">
+							<paragraph>
+							
+							</paragraph>
+						</section>
+						
+						<section title="">
+							<paragraph>
+							
+							</paragraph>
+						</section>
+					</chapter>
+				</part>
+			</parts>
+		</book>
+	</library>
+	</libraries>

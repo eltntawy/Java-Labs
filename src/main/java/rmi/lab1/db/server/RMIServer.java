@@ -14,7 +14,7 @@ public class RMIServer {
 	    RMIServiceInterface service = new RMIServiceImpl();
 	    
 	    
-	    Registry reg = LocateRegistry.getRegistry();
+	    Registry reg = LocateRegistry.createRegistry(8888);
 	    
 	    reg.rebind("InsertEmp", service);
 	    

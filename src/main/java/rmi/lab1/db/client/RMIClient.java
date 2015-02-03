@@ -15,7 +15,7 @@ public class RMIClient {
 
 	Registry reg;
 	try {
-	    reg = LocateRegistry.getRegistry("127.0.0.1");
+	    reg = LocateRegistry.getRegistry("127.0.0.1",8888);
 
 	    RMIServiceInterface insertEmp = (RMIServiceInterface) reg.lookup("InsertEmp");
 

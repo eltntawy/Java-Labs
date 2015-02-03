@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: green;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.javafx.lab4.FXMLCarRoudGameController">
+   <left>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Path fx:id="carPath" blendMode="LIGHTEN" cacheHint="SPEED" fill="DODGERBLUE" fillRule="EVEN_ODD" layoutX="100.0" layoutY="100.0" nodeOrientation="LEFT_TO_RIGHT" opacity="0.66" scaleX="0.75" scaleY="0.75" stroke="#171717" strokeDashOffset="100.0" strokeLineCap="BUTT" strokeLineJoin="BEVEL" strokeMiterLimit="100.0" strokeType="OUTSIDE" strokeWidth="50.0">
+                <elements>
+                    <MoveTo />
+                    <LineTo y="200.0" />
+                    <ArcTo radiusX="10.0" radiusY="10.0" x="200.0" y="100.0" />
+                  <ArcTo radiusX="10.0" radiusY="10.0" x="400.0" y="200.0" />
+                  <LineTo x="400.0" />
+                  <ArcTo radiusX="10.0" radiusY="10.0" x="200.0" y="100.0" />
+                  <ArcTo radiusX="10.0" radiusY="10.0" />
+                    <ClosePath />
+                </elements>
+            </Path>
+            <ImageView fx:id="car" fitHeight="63.0" fitWidth="118.0" pickOnBounds="true" preserveRatio="true" />
+            <Path fx:id="carPath1" blendMode="LIGHTEN" cacheHint="SPEED" fill="#0a0a0a" fillRule="EVEN_ODD" layoutX="100.0" layoutY="100.0" nodeOrientation="LEFT_TO_RIGHT" opacity="0.66" scaleX="0.7" scaleY="0.7" smooth="false" stroke="#f5f0f0" strokeDashOffset="100.0" strokeLineCap="BUTT" strokeLineJoin="BEVEL" strokeMiterLimit="100.0" strokeType="OUTSIDE" strokeWidth="10.0">
+               <elements>
+                  <MoveTo />
+                  <LineTo y="200.0" />
+                  <ArcTo radiusX="10.0" radiusY="10.0" x="200.0" y="100.0" />
+                  <ArcTo radiusX="10.0" radiusY="10.0" x="400.0" y="200.0" />
+                  <LineTo x="400.0" />
+                  <ArcTo radiusX="10.0" radiusY="10.0" x="200.0" y="100.0" />
+                  <ArcTo radiusX="10.0" radiusY="10.0" />
+                  <ClosePath />
+               </elements>
+            </Path>
+         </children>
+         <effect>
+            <Glow />
+         </effect>
+      </AnchorPane>
+   </left>
+</BorderPane>

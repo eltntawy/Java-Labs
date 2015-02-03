@@ -1,33 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE library SYSTEM "library.dtd">
 
-<librarys>
+<libraries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:noNamespaceSchemaLocation="library.xsd">
 
-	<library name="" location="" description="">
-		<book ISBN="" title="" author="" preeface="">
-			<parts>
-				<part title="" />
-				<chapter title="" summary="">
+    <library name="" location="" description="">
+        <book ISBN="" title="" author="" preface="">
+            <parts>
+                <part title="">
+                    <chapter title="" summary="">
 
-					<sections>
-						<paragraph />
-					</sections>
-				</chapter>
-			</parts>
-		</book>
-	</library>
-	<library name="" location="" description="">
-		<book ISBN="" title="" author="" preeface="">
-			<parts>
-				<part title="" />
-				<chapter title="" summary="">
-
-					<sections>
-						<paragraph />
-					</sections>
-				</chapter>
-			</parts>
-		</book>
-	</library>
-
-</librarys>
+                        <sections title="">
+                            <paragraph > </paragraph>
+                        </sections>
+                    </chapter>
+                </part>
+            </parts>
+        </book>
+    </library>
+</libraries>

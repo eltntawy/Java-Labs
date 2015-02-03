@@ -1,0 +1,24 @@
+{
+    "library": {
+        "name": "",
+        "location": "",
+        "description": "",
+        "book": [{
+            "title": "",
+            "author": "",
+            "parts": {
+                "title": "",
+                "part": {
+                    "title": "",
+                    "chapter": {
+                        "title": "",
+                        "section": {
+                            "title": "",
+                            "paragraph": ""
+                        }
+                    }
+                }
+            }
+        }]
+    }
+}

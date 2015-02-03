@@ -1,25 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!DOCTYPE librarys [ 
 		<!ELEMENT library (book*)>
 		<!ELEMENT book (parts*)+>
-		<!ELEMENT parts (part , chapter)+>
-		<!ELEMENT part (#PCDATA)+>
+		<!ELEMENT parts (part)+>
+		<!ELEMENT part (chapter)+>
 		<!ELEMENT chapter (sections+)>
 		<!ELEMENT sections (paragraph+)>
 		<!ELEMENT paragraph (#PCDATA)*>
-]>
+
 
 
 <!ATTLIST library 
-		name CDATA ""
-		location CDATA ""
+		name CDATA #REQUIRED
+		location CDATA #REQUIRED
 		description CDATA "">
 		
 
 <!ATTLIST book 
-		ISBN  CDATA ""
-		title  CDATA ""
+		ISBN  CDATA #REQUIRED
+		title  CDATA #REQUIRED
 		author  CDATA ""
 		preface  CDATA "">
 		
@@ -29,11 +28,11 @@
 		title  CDATA "">
 
 <!ATTLIST chapter 
-		title  CDATA ""
+		title  CDATA #REQUIRED
 		summary  CDATA "">	
 
 <!ATTLIST sections 
-		title  CDATA ""
+		title  CDATA #REQUIRED
 		summary  CDATA "">
 		
 <!ATTLIST paragraph >

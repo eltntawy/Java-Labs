@@ -1,0 +1,9 @@
+<History>
+	<LoginUser USerNAme="To User" UserID=""> 
+
+		<SenderUser UserName="From User" UserID=" " /> </SenderUser>
+				<Message Date="" SessionID="">
+					<Text Style="font-family:MS Shell Dlg; color:#000000; ">Text </Text>
+				</Message>		
+	</LoginUser>
+</History>
