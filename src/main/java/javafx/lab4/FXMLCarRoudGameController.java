@@ -1,31 +1,11 @@
 package main.java.javafx.lab4;
 
-import java.io.File;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
-
-import javafx.animation.Interpolator;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.PathTransition;
+import javafx.animation.*;
 import javafx.animation.PathTransition.OrientationType;
-import javafx.animation.PathTransitionBuilder;
-import javafx.animation.Timeline;
-import javafx.animation.TimelineBuilder;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Orientation;
-import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -33,86 +13,89 @@ import javafx.scene.shape.ArcToBuilder;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
 import javafx.scene.shape.PathBuilder;
-import javafx.util.Callback;
 import javafx.util.Duration;
+
+import java.net.URL;
+import java.util.ResourceBundle;
 
 public class FXMLCarRoudGameController implements Initializable {
 
-	@FXML
-	Path carPath;
+    @FXML
+    Path carPath;
 
-	@FXML
-	Path carPath1;
+    @FXML
+    Path carPath1;
 
-	@FXML
-	ImageView car;
+    @FXML
+    ImageView car;
 
-	Timeline timeline;
-	PathTransition anim;
+    Timeline timeline;
+    PathTransition anim;
 
-	SimpleIntegerProperty dir = new SimpleIntegerProperty(-1);
-	SimpleIntegerProperty startValue = new SimpleIntegerProperty(-10);
+    SimpleIntegerProperty dir = new SimpleIntegerProperty(-1);
+    SimpleIntegerProperty startValue = new SimpleIntegerProperty(-10);
 
-	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
+    public void initialize(URL location, ResourceBundle resources) {
+        // TODO Auto-generated method stub
 
-		startValue.bind(dir);
-		startValue.multiply(dir);
+        startValue.bind(dir);
+        startValue.multiply(dir);
 
-		Path path = PathBuilder
-				.create()
-				.elements(
-						new MoveTo(100, 100),
-						ArcToBuilder.create().x(200).y(200).radiusX(500)
-								.radiusY(500).sweepFlag(true).build()).build();
-		// carPath.setStyle(
-		// ".path { -fx-fill: yellow;"
-		// + "-fx-stroke: green;" + "-fx-stroke-width: 5;"
-		// + "-fx-stroke-dash-array: 12 2 4 2;"
-		// + "-fx-stroke-dash-offset: 6;"
-		// + "-fx-stroke-line-cap: butt;}");
+        Path path = PathBuilder
+                .create()
+                .elements(
+                        new MoveTo(100, 100),
+                        ArcToBuilder.create().x(200).y(200).radiusX(500)
+                                .radiusY(500).sweepFlag(true).build()).build();
+        // carPath.setStyle(
+        // ".path { -fx-fill: yellow;"
+        // + "-fx-stroke: green;" + "-fx-stroke-width: 5;"
+        // + "-fx-stroke-dash-array: 12 2 4 2;"
+        // + "-fx-stroke-dash-offset: 6;"
+        // + "-fx-stroke-line-cap: butt;}");
 
-		car.setImage(new Image(getClass().getResourceAsStream("car_toy.png")));
+        car.setImage(new Image(getClass().getResourceAsStream("car_toy.png")));
 
-		anim = PathTransitionBuilder.create().duration(new Duration(10000))
-				.node(car).path(carPath)
-				.orientation(OrientationType.ORTHOGONAL_TO_TANGENT)
-				.interpolator(Interpolator.LINEAR)
-				.cycleCount(Timeline.INDEFINITE).autoReverse(false).build();
+        anim = PathTransitionBuilder.create().duration(new Duration(10000))
+                .node(car).path(carPath)
+                .orientation(OrientationType.ORTHOGONAL_TO_TANGENT)
+                .interpolator(Interpolator.LINEAR)
+                .cycleCount(Timeline.INDEFINITE).autoReverse(false).build();
 
-		timeline = TimelineBuilder
-				.create()
-				.autoReverse(false)
-				.cycleCount(Timeline.INDEFINITE)
-				.keyFrames(
-						new KeyFrame(new Duration(0.0), new KeyValue(
-								startValue, 0)),
-						new KeyFrame(new Duration(0.0), new KeyValue(
-								startValue, 500)))
-				.cycleCount(Timeline.INDEFINITE).build();
+        timeline = TimelineBuilder
+                .create()
+                .autoReverse(false)
+                .cycleCount(Timeline.INDEFINITE)
+                .keyFrames(
+                        new KeyFrame(new Duration(0.0), new KeyValue(
+                                startValue, 0)),
+                        new KeyFrame(new Duration(0.0), new KeyValue(
 
-		anim.play();
-		//carPath.setStyle("-fx-stroke-dash-offset: 6;-fx-stroke-dash-array: 12 2 4 2; -fx-stroke: green;");
-		//timeline.setCycleCount(-1);
+                                startValue, 500)))
+                .cycleCount(Timeline.INDEFINITE).build();
 
-		carPath1.getStrokeDashArray().add(50.0);
-		carPath1.getStrokeDashArray().add(50.0);
-		carPath1.getStrokeDashArray().add(50.0);
-		carPath1.getStrokeDashArray().add(50.0);
-		carPath1.getStrokeDashArray().add(50.0);
-		carPath1.getStrokeDashArray().add(50.0);
-		carPath1.getStrokeDashArray().add(50.0);
-		carPath1.getStrokeDashArray().add(50.0);
+        anim.play();
+        //carPath.setStyle("-fx-stroke-dash-offset: 6;-fx-stroke-dash-array: 12 2 4 2; -fx-stroke: green;");
+        //timeline.setCycleCount(-1);
 
-		car.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        carPath1.getStrokeDashArray().add(50.0);
+        carPath1.getStrokeDashArray().add(50.0);
+        carPath1.getStrokeDashArray().add(50.0);
+        carPath1.getStrokeDashArray().add(50.0);
+        carPath1.getStrokeDashArray().add(50.0);
+        carPath1.getStrokeDashArray().add(50.0);
+        carPath1.getStrokeDashArray().add(50.0);
+        carPath1.getStrokeDashArray().add(50.0);
 
-			public void handle(MouseEvent event) {
-				// TODO Auto-generated method stub
-				anim.setRate(anim.getRate()*-1);
+        car.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
-				startValue.get();
-				System.out.println("mouse click - " + startValue);
-			}
-		});
-	}
+            public void handle(MouseEvent event) {
+                // TODO Auto-generated method stub
+                anim.setRate(anim.getRate() * -1);
+
+                startValue.get();
+                System.out.println("mouse click - " + startValue);
+            }
+        });
+    }
 }
