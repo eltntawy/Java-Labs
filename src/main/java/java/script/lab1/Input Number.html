@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Input Number</title>
+<script type="text/javascript">
+	var num1 = prompt("Please enter number 1");
+	var num2 = prompt("Please enter number 2");
+	var num3 = prompt("Please enter number 3");
+</script>
+
+</head>
+<body>
+
+	<script type="text/javascript">
+		if (isNaN(num1) || isNaN(num2) || isNaN(num3)) {
+			document.write("invalid numbers")
+		} else {
+			document.write("first number is : " + num1);
+			document.write("</br>")
+			document.write("second number is : " + num2);
+			document.write("</br>")
+			document.write("third number is : " + num3);
+			document.write("</br>")
+			document.write("The minimum is : ");
+			if (num1 <= num2 && num1 <= num3) {
+				document.write(num1);
+			} else if (num2 <= num1 && num2 <= num3) {
+				document.write(num2);
+			} else if (num3 <= num1 && num3 <= num2) {
+				document.write(num3);
+			}
+
+			document.write("</br>");
+			document.write("the maximum is : ");
+
+			if (num1 >= num2 && num1 >= num3) {
+				document.write(num1);
+			} else if (num2 >= num1 && num2 >= num3) {
+				document.write(num2);
+			} else if (num3 >= num1 && num3 >= num2) {
+				document.write(num3);
+			}
+		}
+	</script>
+	
+
+</body>
+</html>

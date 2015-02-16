@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Prompt Box</title>
+<script type="text/javascript">
+	var listType;
+
+	listType = prompt("Please enter your list type", 1)
+</script>
+
+</head>
+<body>
+	<script type="text/javascript">
+		if (listType == 1) {
+			document.write("Bullet List");
+			printList(" ", "ul");
+		} else if (listType == 2) {
+			document.write("Ordered List : Number");
+			printList(1,"ol");
+		} else if (listType == 3) {
+			document.write("Ordered List : Letters  ");
+			printList("a","ol");
+		} else {
+			document.write("not valid input");
+		}
+
+		// type is the format
+		function printList(type, list) {
+			document
+					.write("<"+list+" type = '"+type+"'><li  >list item 1</li><li>list item 2</li><li>list item 3</li><li>list item 4</li></"+list+">");
+		}
+	</script>
+
+
+</body>
+</html>

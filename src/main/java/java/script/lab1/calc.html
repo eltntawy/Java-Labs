@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>calculator</title>
+
+<!-- <script  type="text/css" 		src="/home/eltntawy/ITI/Java/Java-Labs/src/main/java/java/script/lab1/css/bootstrap.min.css"></script> -->
+
+<script type="text/javascript"	src="/home/eltntawy/ITI/Java/Java-Labs/src/main/java/java/script/lab1/js/jquery.min.js" ></script>
+
+
+<script type="text/javascript"
+	src="/home/eltntawy/ITI/Java/Java-Labs/src/main/java/java/script/lab1/js/bootstrap.js"></script>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script> -->
+
+<script type="text/javascript">
+	function calc() {
+		var res = document.getElementById("result").value;
+		try {
+			if(!isNaN(eval(res))) {
+				document.getElementById("result").value = eval(res);
+				$("#lbl_error").hide();
+			}	
+		} catch (err) {
+			$("#lbl_error").show();
+		}
+	}
+
+	function showOper(x) {
+		document.getElementById("result").value += x;
+	}
+</script>
+
+</head>
+<body>
+
+<br/><br/><br/><br/>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-2 col-md-offset-5">
+			<table   class="table table-striped table-bordered">
+			<tr align="center" >
+				<td colspan="4" align="center">
+				<input id="result"  class="form-control" >
+				<span id="lbl_error" class="label label-danger">Unsupported Operation</span>
+				</td>
+				
+			</tr>
+			<tr align="center" >
+				<td  ><input class="btn btn-lg btn-default" type="button" value="7" onclick="showOper(7)"></td>
+				<td><input class="btn btn-lg btn-default" type="button" value="8" onclick="showOper(8)"></td>
+				<td><input class="btn btn-lg btn-default" type="button" value="9" onclick="showOper(9)"></td>
+				<td><input class="btn btn-lg btn-primary" type="button" value="+" onclick="showOper('+')"></td>
+			</tr>
+			<tr align="center" >
+				<td><input class="btn btn-lg btn-default" type="button" value="4" onclick="showOper(4)"></td>
+				<td><input class="btn btn-lg btn-default" type="button" value="5" onclick="showOper(5)"></td>
+				<td><input class="btn btn-lg btn-default" type="button" value="6" onclick="showOper(6)"></td>
+				<td><input class="btn btn-lg btn-primary" type="button" value="-" onclick="showOper('-')"></td>
+			</tr>
+			<tr align="center" >
+				<td><input class="btn btn-lg btn-default" type="button" value="1" onclick="showOper(1)"></td>
+				<td><input class="btn btn-lg btn-default" type="button" value="2" onclick="showOper(2)"></td>
+				<td><input class="btn btn-lg btn-default" type="button" value="3" onclick="showOper(3)"></td>
+				<td><input class="btn btn-lg btn-primary" type="button" value="*" onclick="showOper('*')"></td>
+			</tr>
+			<tr align="center" >
+				<td colspan="2"  ><input class="btn btn-lg btn-default col-md-10 " type="button" value="0" onclick="showOper(0)"></td>
+				<td><input class="btn btn-lg btn- btn-success" type="button" value="=" onclick="calc()"></td>
+				<td><input class="btn btn-lg btn-primary" type="button" value="/" onclick="showOper('/')"></td>
+			</tr>
+		</table>
+			
+			</div>
+		</div>
+
+
+
+
+
+	</div>
+
+
+<script type="text/javascript">
+$("#lbl_error").hide();
+</script>
+
+
+</body>
+</html>

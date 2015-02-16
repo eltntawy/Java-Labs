@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>factorial</title>
+
+
+<script type="text/javascript">
+	var num = prompt("Please enter number : ");
+</script>
+
+</head>
+<body>
+
+
+
+	<script type="text/javascript">
+		function fact(x) {
+			var ret = 1;
+			for (i = 1; i <= x; i++) {
+				ret = ret * i;
+			}
+			return ret;
+		}
+
+		document
+				.write("<table  border='1'> <tr> <td>Number</td><td>Factorial</td></tr>");
+		for (i = 0; i < num; i++) {
+			document.write("<tr><td>" + i + "!</td><td>" + fact(i)
+					+ "</td></tr>");
+		}
+		document.write("</table>");
+	</script>
+	<form action="#">
+		<input type="button" value="calc factorial" onclick="alert(fact(prompt('Please enter number ')))" />
+	</form>
+
+
+
+</body>
+</html>
